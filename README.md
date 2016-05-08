@@ -1,2 +1,3 @@
-# react-seed
-A basis for building SPAs in React
+# Colour Picker Tutorial
+
+A simple demo app designed to help teach React concepts
