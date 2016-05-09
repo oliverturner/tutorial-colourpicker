@@ -1,37 +1,62 @@
 import path              from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import pcssFocus         from 'postcss-focus';
 import pcssNested        from 'postcss-nested';
 import pcssReporter      from 'postcss-reporter';
 
-const extractForProduction = (loaders) =>
-  ExtractTextPlugin.extract('style', loaders.substr(loaders.indexOf('!')));
+import pkg from '../../package.json';
 
+// Utils
+//-----------------------------------------------
+const extractForProduction = (loaders) => {
+  const extractLoaders = loaders.substr(loaders.indexOf('!'));
 
-function makeConfig (options) {
-  let cssLoaders = `style!css?module&localIdentName=${options.localIdentName}!postcss`;
+  return ExtractTextPlugin.extract('style', extractLoaders);
+};
 
-  if (options.production) {
+const getCssLoaders = ({localIdentName, production}) => {
+  let cssLoaders = `style!css?module&localIdentName=${localIdentName}!postcss`;
+
+  if (production) {
     cssLoaders = extractForProduction(cssLoaders);
   }
 
-  const entries = options.entry || [];
+  return cssLoaders;
+};
 
+// Main config
+//-----------------------------------------------
+function makeConfig ({
+  preEntries = [],
+  production,
+  devtool,
+  output,
+  moduleLoaders,
+  localIdentName,
+  plugins,
+  externals = {}
+}) {
   return {
+    devtool,
+    externals,
+
+    debug: !!production,
+
     entry: [
       'sanitize.css/lib/sanitize.css',
-      ...entries,
+      ...preEntries,
       './src/index.js'
     ],
 
-    debug:   !options.production,
-    devtool: options.devtool,
-
-    output: options.output,
+    output: output || {
+      path:       './public',
+      publicPath: '/',
+      filename:   'app.js'
+    },
 
     module: {
-      preLoaders: [],
-      loaders:    [
+      loaders: moduleLoaders || [
         {
           test:    /\.jsx?$/,
           loaders: ['babel'],
@@ -39,7 +64,11 @@ function makeConfig (options) {
         },
         {
           test:   /\.p?css$/,
-          loader: cssLoaders
+          loader: getCssLoaders({localIdentName, production})
+        },
+        {
+          test:   /\.json$/,
+          loader: 'json'
         },
         {
           test:   /\.png$/,
@@ -65,7 +94,12 @@ function makeConfig (options) {
       extensions:         ['', '.js', '.jsx']
     },
 
-    plugins: options.plugins,
+    plugins: plugins || [
+      new HtmlWebpackPlugin({
+        title:    pkg.description,
+        template: './config/tmplate.html'
+      })
+    ],
 
     postcss: [
       pcssFocus,
