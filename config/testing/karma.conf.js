@@ -4,20 +4,21 @@ const webpack = require('../webpack/webpack.test.babel');
 
 module.exports = (config) => {
   config.set({
-    basePath:   '',
-    frameworks: ['jasmine'],
+    basePath:   process.cwd(),
+    browsers:   ['Chrome'],
+    frameworks: ['mocha', 'chai'],
     files:      [
-      'test/**/*.js'
+      'src/**/__test__/*.js'
     ],
 
     // add webpack as preprocessor
     preprocessors: {
-      'src/**/*.js':  ['webpack', 'sourcemap'],
-      'test/**/*.js': ['webpack', 'sourcemap']
+      'src/**/*.jsx':         ['webpack', 'sourcemap'],
+      'src/**/__test__/*.js': ['webpack', 'sourcemap']
     },
 
     // kind of a copy of your webpack config
-    webpack,
+    webpack: webpack.default,
 
     // please don't spam the console when running in karma!
     webpackServer: {
@@ -26,24 +27,18 @@ module.exports = (config) => {
 
     plugins: [
       'karma-webpack',
-      'karma-jasmine',
+      'karma-mocha',
+      'karma-mocha-reporter',
+      'karma-chai',
       'karma-sourcemap-loader',
-      'karma-chrome-launcher',
-      'karma-phantomjs-launcher'
+      'karma-chrome-launcher'
     ],
 
-    babelPreprocessor: {
-      options: {
-        presets: ['airbnb']
-      }
-    },
-
-    reporters: ['progress'],
+    reporters: ['mocha'],
     port:      9876,
     colors:    true,
     logLevel:  config.LOG_INFO,
     autoWatch: true,
-    browsers:  ['Chrome'],
     singleRun: false
   });
 };
