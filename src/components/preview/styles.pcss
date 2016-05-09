@@ -1,11 +1,6 @@
 .preview {
-  /*@apply --fader;*/
-
-  display:        flex;
-  flex-direction: column;
-
-  width:          200px;
-  height:         200px;
+  composes: subcomponent from 'css/base.pcss';
+  composes: fader from 'css/base.pcss';
 }
 
 .preview__footer {
@@ -13,5 +8,5 @@
   border:     none;
   font-size:  1rem;
   text-align: center;
-  background: rgba(#fff, 0.5);
+  background: rgba(255, 255, 255, 0.5);
 }

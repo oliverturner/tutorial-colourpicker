@@ -1,15 +1,10 @@
 .favelist {
-  display:        flex;
-  flex-direction: column;
+  composes:        subcomponent from 'css/base.pcss';
 
-  width:          200px;
-  height:         200px;
-}
-
-.favelist {
   flex-wrap:       wrap;
   justify-content: flex-start;
   align-content:   flex-start;
+  align-items:     flex-start;
 
   margin:          0 0 0 20px;
   padding:         0;
@@ -17,13 +12,25 @@
   background:      #eee;
 }
 
-.fave {
-  @include fader;
+.favelist__item {
+  flex: 0;
 
-  display:     block;
-  width:       50px;
-  height:      50px;
-  border-top:  1px solid white;
   border-left: 1px solid white;
-  cursor:      pointer;
+  border-top:  1px solid white;
+}
+
+.favelist__btn {
+  composes: fader from 'css/base.pcss';
+
+  display:  block;
+  width:    50px;
+  height:   50px;
+  border:   none;
+  cursor:   pointer;
+  outline:  none;
+}
+
+.favelist__btn:focus,
+.favelist__btn:hover {
+  border: 1px solid #333;
 }

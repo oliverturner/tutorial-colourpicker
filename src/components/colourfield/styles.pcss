@@ -3,11 +3,18 @@
   justify-content: center;
 
   width:           100%;
-  margin:          0;
-  padding:         20px 0 0;
+  margin:          10px 0 0;
+  padding:         0;
 }
 
 .controls__input {
-  flex: 1;
-  border: 1px solid #ccc;
+  composes:   textfield from 'css/base.pcss';
+
+  flex:       1;
+
+  background: #fff;
+}
+
+.controls__btn {
+  composes: controlbtn from 'css/base.pcss';
 }

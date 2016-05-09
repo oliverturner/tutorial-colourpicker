@@ -1,0 +1,4 @@
+export default {
+  SET_ACTIVE_COLOUR: 'SET_ACTIVE_COLOUR',
+  SET_TEMP_COLOUR:   'SET_TEMP_COLOUR'
+};

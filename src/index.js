@@ -1,6 +1,6 @@
 // IMPORTANT: This needs to be first (before any other components)
 // to get around CSS order randomness in webpack.
-import 'css/base.pcss';
+import 'css/reset.pcss';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -12,7 +12,6 @@ import App from 'pages/home';
 const store = configureStore();
 const rootEl = document.getElementById('app');
 
-// Replace <AppContainer component={App} props={{ myProp: myValue }} /> with <AppContainer><App myProp={myValue} /></AppContainer>.
 ReactDOM.render(
   <AppContainer>
     <App store={store} />

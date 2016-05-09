@@ -1,9 +1,7 @@
 import path              from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import pcssCssNext       from 'postcss-cssnext';
+import pcssFocus         from 'postcss-focus';
 import pcssNested        from 'postcss-nested';
-import pcssApply         from 'postcss-apply';
-import pcssVars          from 'postcss-simple-vars';
 import pcssReporter      from 'postcss-reporter';
 
 const extractForProduction = (loaders) =>
@@ -17,10 +15,12 @@ function makeConfig (options) {
     cssLoaders = extractForProduction(cssLoaders);
   }
 
+  const entries = options.entry || [];
+
   return {
     entry: [
-      ...options.entry,
       'sanitize.css/lib/sanitize.css',
+      ...entries,
       './src/index.js'
     ],
 
@@ -68,12 +68,8 @@ function makeConfig (options) {
     plugins: options.plugins,
 
     postcss: [
-      pcssApply,
-      pcssCssNext,
+      pcssFocus,
       pcssNested,
-      pcssVars({
-        // variables: () => require('./config/colors')
-      }),
       pcssReporter({clearMessages: true})
     ],
 
