@@ -9,7 +9,11 @@ import Favourites from 'components/favourites';
 import constants from 'constants';
 import styles from './styles.pcss';
 
-const Application = ({activeColour, tempColour, palette, setActiveColour, setTempColour, addPaletteColour}) => (
+const Application = ({
+  activeColour, tempColour, palette,
+  setActiveColour, setTempColour,
+  addPaletteColour, fillPalette, sortPalette, shufflePalette, clearPalette
+}) => (
   <div className={styles['container']} style={{backgroundColor: activeColour}}>
     <div className={styles['component']}>
       <Header>Colour Picker</Header>
@@ -22,7 +26,40 @@ const Application = ({activeColour, tempColour, palette, setActiveColour, setTem
         <Preview activeColour={activeColour} tempColour={tempColour} />
         <Favourites palette={palette} onHover={setTempColour} onClick={setActiveColour} />
       </div>
-      <button className={styles['controlbtn']} onClick={() => setActiveColour()}>Randomise!</button>
+      <footer className={styles['footer']}>
+        <div className={styles['controls']}>
+          <button
+            className={styles.controlbtn}
+            onClick={() => setActiveColour()}
+          >Randomise
+          </button>
+        </div>
+        <div className={styles['controls']}>
+          <button
+            className={styles['controlbtn']}
+            onClick={fillPalette}
+          >Fill
+          </button>
+          <button
+            className={styles['controlbtn']}
+            onClick={sortPalette}
+            disabled={palette.length < 2}
+          >Sort
+          </button>
+          <button
+            className={styles['controlbtn']}
+            onClick={shufflePalette}
+            disabled={palette.length < 2}
+          >Mix
+          </button>
+          <button
+            className={styles['controlbtn']}
+            onClick={clearPalette}
+            disabled={palette.length === 0}
+          >Clear
+          </button>
+        </div>
+      </footer>
     </div>
   </div>
 );
@@ -33,7 +70,11 @@ Application.propTypes = {
   palette:          PropTypes.array.isRequired,
   setActiveColour:  PropTypes.func.isRequired,
   setTempColour:    PropTypes.func.isRequired,
-  addPaletteColour: PropTypes.func.isRequired
+  addPaletteColour: PropTypes.func.isRequired,
+  fillPalette:      PropTypes.func.isRequired,
+  sortPalette:      PropTypes.func.isRequired,
+  shufflePalette:   PropTypes.func.isRequired,
+  clearPalette:     PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -45,7 +86,11 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   setActiveColour:  (colour) => dispatch({type: constants.SET_ACTIVE_COLOUR, payload: {colour}}),
   setTempColour:    (colour) => dispatch({type: constants.SET_TEMP_COLOUR, payload: {colour}}),
-  addPaletteColour: (colour) => dispatch({type: constants.ADD_PALETTE_COLOUR, payload: {colour}})
+  addPaletteColour: (colour) => dispatch({type: constants.PALETTE_ADD_COLOUR, payload: {colour}}),
+  fillPalette:      () => dispatch({type: constants.PALETTE_FILL}),
+  sortPalette:      () => dispatch({type: constants.PALETTE_SORT}),
+  shufflePalette:   () => dispatch({type: constants.PALETTE_SHUFFLE}),
+  clearPalette:     () => dispatch({type: constants.PALETTE_CLEAR})
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Application);

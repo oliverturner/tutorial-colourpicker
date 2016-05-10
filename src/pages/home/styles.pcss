@@ -1,5 +1,5 @@
 .container {
-  composes: fader from 'css/base.pcss';
+  composes:        fader from 'css/base.pcss';
 
   display:         flex;
   justify-content: center;
@@ -42,6 +42,35 @@
   background: #fff;
 }
 
+.footer {
+  display:         flex;
+  justify-content: space-between;
+
+  width:           100%;
+  padding:         0 20px;
+}
+
+.controls {
+  display:         flex;
+  flex:            1;
+  justify-content: space-around;
+
+  margin-left:     20px;
+}
+
+.controls:first-child {
+  margin-left: 0;
+}
+
 .controlbtn {
-  composes: controlbtn from 'css/base.pcss';
+  composes:       controlbtn from 'css/base.pcss';
+
+  padding:        3px 7px;
+  text-transform: lowercase;
+  font-variant:   small-caps;
+}
+
+.controlbtn:disabled {
+  opacity:        0.5;
+  pointer-events: none;
 }

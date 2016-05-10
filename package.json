@@ -102,6 +102,7 @@
     "karma": "cross-env NODE_ENV=test karma start",
     "lint:js": "eslint --config config/linters/.eslintrc.js ./src ./config",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack/webpack.dev.babel.js --hot --inline",
-    "test": "cross-env NODE_ENV=test karma start config/testing/karma.conf.js --single-run --browsers Chrome"
+    "test": "cross-env NODE_ENV=test karma start config/testing/karma.conf.js",
+    "test:once": "npm test -- --single-run"
   }
 }

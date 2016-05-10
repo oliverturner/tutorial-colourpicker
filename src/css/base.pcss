@@ -1,21 +1,22 @@
 .fader {
-  transition: 0.5s background-color;
+  transition: 0.5s all;
 }
 
 .textfield {
   padding:        5px 10px;
   border:         none;
-  outline:        1px solid #999;
+  outline:        1px solid #aaa;
   outline-offset: 0;
 }
 
 .controlbtn {
-  composes:   textfield;
-  composes:   fader;
+  composes:         textfield;
+  composes:         fader;
 
-  cursor:     pointer;
-  background: #ccc;
-  color:      inherit;
+  display:          block;
+  cursor:           pointer;
+  background-color: #ccc;
+  color:            inherit;
 }
 
 .controlbtn:focus,
