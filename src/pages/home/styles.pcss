@@ -34,36 +34,35 @@
 }
 
 .row {
-  display:    flex;
-
-  margin:     20px 0;
-  padding:    20px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
-  background: #fff;
-}
-
-.footer {
   display:         flex;
   justify-content: space-between;
 
-  width:           100%;
-  padding:         0 20px;
+  margin:          20px 0;
+  padding:         20px;
+  box-shadow:      0 0 5px rgba(0, 0, 0, 0.35);
+  background:      #fff;
+}
+
+.row__item {
+  width:       200px;
+  margin-left: 20px;
+}
+
+.row__item:first-child {
+  margin: 0;
 }
 
 .controls {
   display:         flex;
-  flex:            1;
   justify-content: space-around;
 
-  margin-left:     20px;
-}
-
-.controls:first-child {
-  margin-left: 0;
+  margin-top:      10px;
 }
 
 .controlbtn {
   composes:       controlbtn from 'css/base.pcss';
+
+  flex: 1;
 
   padding:        3px 7px;
   text-transform: lowercase;

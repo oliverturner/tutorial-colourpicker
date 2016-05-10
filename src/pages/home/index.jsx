@@ -4,12 +4,14 @@ import {connect} from 'react-redux';
 import Header from 'components/header';
 import ColourField from 'components/colourfield';
 import Preview from 'components/preview';
-import Favourites from 'components/favourites';
+import Palette from 'components/palette';
+import Test from 'components/test';
 
 import constants from 'constants';
 import styles from './styles.pcss';
 
 const Application = ({
+  store,
   activeColour, tempColour, palette,
   setActiveColour, setTempColour,
   addPaletteColour, fillPalette, sortPalette, shufflePalette, clearPalette
@@ -17,49 +19,38 @@ const Application = ({
   <div className={styles['container']} style={{backgroundColor: activeColour}}>
     <div className={styles['component']}>
       <Header>Colour Picker</Header>
-      <ColourField
-        colour={activeColour}
-        onChange={setActiveColour}
-        onSubmit={addPaletteColour}
-      />
+      <Test store={store} />
+      <ColourField colour={activeColour} onChange={setActiveColour} onSubmit={addPaletteColour} />
       <div className={styles['row']}>
-        <Preview activeColour={activeColour} tempColour={tempColour} />
-        <Favourites palette={palette} onHover={setTempColour} onClick={setActiveColour} />
+        <div className={styles['row__item']}>
+          <Preview activeColour={activeColour} tempColour={tempColour} />
+          <div className={styles['controls']}>
+            <button className={styles['controlbtn']} onClick={() => setActiveColour()}>
+              Randomise
+            </button>
+          </div>
+        </div>
+        <div className={styles['row__item']}>
+          <Palette palette={palette} onHover={setTempColour} onClick={setActiveColour} />
+          <div className={styles['controls']}>
+            <button className={styles['controlbtn']} onClick={fillPalette}>
+              Fill
+            </button>
+            <button className={styles['controlbtn']} onClick={sortPalette}
+              disabled={palette.length < 2}>
+              Sort
+            </button>
+            <button className={styles['controlbtn']} onClick={shufflePalette}
+              disabled={palette.length < 2}>
+              Mix
+            </button>
+            <button className={styles['controlbtn']} onClick={clearPalette}
+              disabled={palette.length === 0}>
+              Clear
+            </button>
+          </div>
+        </div>
       </div>
-      <footer className={styles['footer']}>
-        <div className={styles['controls']}>
-          <button
-            className={styles.controlbtn}
-            onClick={() => setActiveColour()}
-          >Randomise
-          </button>
-        </div>
-        <div className={styles['controls']}>
-          <button
-            className={styles['controlbtn']}
-            onClick={fillPalette}
-          >Fill
-          </button>
-          <button
-            className={styles['controlbtn']}
-            onClick={sortPalette}
-            disabled={palette.length < 2}
-          >Sort
-          </button>
-          <button
-            className={styles['controlbtn']}
-            onClick={shufflePalette}
-            disabled={palette.length < 2}
-          >Mix
-          </button>
-          <button
-            className={styles['controlbtn']}
-            onClick={clearPalette}
-            disabled={palette.length === 0}
-          >Clear
-          </button>
-        </div>
-      </footer>
     </div>
   </div>
 );

@@ -1,0 +1,36 @@
+.palette {
+  composes:        subcomponent from 'css/base.pcss';
+
+  flex-wrap:       wrap;
+  justify-content: flex-start;
+  align-content:   flex-start;
+  align-items:     flex-start;
+
+  margin:          0;
+  padding:         0;
+  list-style:      none;
+  background:      #eee;
+}
+
+.palette__item {
+  flex: 0;
+}
+
+.palette__btn {
+  composes:    fader from 'css/base.pcss';
+
+  position:    relative;
+  display:     block;
+  width:       50px;
+  height:      50px;
+  border:      1px solid white;
+  cursor:      pointer;
+  outline:     none;
+  z-index:     0;
+}
+
+.palette__btn:focus,
+.palette__btn:hover {
+  border:  1px solid #333;
+  z-index: 1;
+}
