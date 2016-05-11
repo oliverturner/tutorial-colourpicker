@@ -4,17 +4,20 @@ import 'css/reset.pcss';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
 import {AppContainer} from 'react-hot-loader';
 
 import configureStore from 'stores';
 import App from 'pages/home';
 
-const store = configureStore();
+const store  = configureStore();
 const rootEl = document.getElementById('app');
 
 ReactDOM.render(
   <AppContainer>
-    <App store={store} />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </AppContainer>,
   rootEl
 );
@@ -26,7 +29,9 @@ if (module.hot) {
     const NextApp = require('pages/home').default;
     ReactDOM.render(
       <AppContainer>
-        <NextApp store={store} />
+        <Provider store={store}>
+          <NextApp />
+        </Provider>
       </AppContainer>,
       rootEl
     );

@@ -25,10 +25,32 @@
   color:            #eee;
 }
 
+.controls {
+  display:         flex;
+  justify-content: space-around;
+
+  margin-top:      10px;
+}
+
 .subcomponent {
   display:        flex;
   flex-direction: column;
 
   width:          200px;
   height:         200px;
+}
+
+.subcontrolbtn {
+  composes:       controlbtn;
+
+  flex:           1;
+
+  padding:        3px 7px;
+  text-transform: lowercase;
+  font-variant:   small-caps;
+}
+
+.subcontrolbtn:disabled {
+  opacity:        0.5;
+  pointer-events: none;
 }

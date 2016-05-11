@@ -51,25 +51,3 @@
 .row__item:first-child {
   margin: 0;
 }
-
-.controls {
-  display:         flex;
-  justify-content: space-around;
-
-  margin-top:      10px;
-}
-
-.controlbtn {
-  composes:       controlbtn from 'css/base.pcss';
-
-  flex: 1;
-
-  padding:        3px 7px;
-  text-transform: lowercase;
-  font-variant:   small-caps;
-}
-
-.controlbtn:disabled {
-  opacity:        0.5;
-  pointer-events: none;
-}

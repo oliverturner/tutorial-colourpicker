@@ -1,4 +1,5 @@
 import {Map} from 'immutable';
+import tinycolor from 'tinycolor2';
 
 import {getRandomColour} from 'utils/colour';
 import constants from 'constants';
@@ -6,7 +7,6 @@ import constants from 'constants';
 
 // Initialise
 //-----------------------------------------------
-
 const initialState = Map({
   active: getRandomColour(),
   temp:   null

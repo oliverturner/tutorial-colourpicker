@@ -2,20 +2,20 @@ import React, {Component, PropTypes} from 'react';
 
 import styles from './styles.pcss';
 
-const PaletteItem = ({fave, onHover, onClick}) => (
+const PaletteItem = ({colour, onHover, onClick}) => (
   <li className={styles['palette__item']}>
     <button
-      className={styles['palette__btn']} style={{backgroundColor: fave}}
-      onMouseOver={onHover(fave)} onFocus={onHover(fave)}
+      className={styles['palette__btn']} style={{backgroundColor: colour}}
+      onMouseOver={onHover(colour)} onFocus={onHover(colour)}
       onMouseOut={onHover()} onBlur={onHover()}
-      onClick={onClick(fave)}
+      onClick={onClick(colour)}
     />
   </li>
 );
 
 
 PaletteItem.propTypes = {
-  fave:    PropTypes.array.isRequired,
+  colour:  PropTypes.string.isRequired,
   onHover: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired
 };

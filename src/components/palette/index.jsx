@@ -19,11 +19,11 @@ class Palette extends Component {
   render () {
     return (
       <ul className={styles['palette']}>
-        {this.props.palette.map((fave, i) => {
-          return fave
-            ? <Item key={i} fave={fave} onHover={this.onHover} onClick={this.onClick} />
-            : false;
-        })}
+        {this.props.palette.map((colour, i) => (
+          colour
+            ? <Item key={i} colour={colour} onHover={this.onHover} onClick={this.onClick} />
+            : false
+        ))}
       </ul>
     );
   }

@@ -10,8 +10,11 @@ export const getRandomColour = () => {
   return colour.isValid() ? colour.toHexString() : getRandomColour();
 };
 
-export const getBrightness = (colour) => {
-  const c = tinycolor(colour);
+export const getBrightness = (colour) => tinycolor(colour).getBrightness();
 
-  return c.getBrightness();
-};
+export const getValidColour = (colour) => (
+  tinycolor(colour).isValid()
+    ? colour
+    : ''
+);
+
