@@ -4,13 +4,15 @@ import tinycolor from 'tinycolor2';
 import styles from './styles.pcss';
 
 const Preview = ({activeColour, tempColour}) => {
-  const colour = tempColour || activeColour;
+  const colour = tinycolor(tempColour || activeColour);
 
-  if (tinycolor(colour).isValid()) {
+  if (colour.isValid()) {
     return (
-      <div className={styles['preview']} style={{backgroundColor: colour}}>
-        <input className={styles['preview__footer']} value={tinycolor(colour).toRgbString()} readOnly />
-      </div>
+      <figure className={styles['preview']} style={{backgroundColor: colour.toHexString()}}>
+        <figcaption className={styles['preview__footer']}>
+          {colour.toRgbString()}
+        </figcaption>
+      </figure>
     );
   }
 

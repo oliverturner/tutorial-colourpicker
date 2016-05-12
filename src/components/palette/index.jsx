@@ -1,38 +1,50 @@
 import React, {Component, PropTypes} from 'react';
 
 import styles from './styles.pcss';
-import Item from './item';
+import Item   from './item';
 
 class Palette extends Component {
   constructor () {
     super();
 
-    this.onHover = (colour) => () => {
-      this.props.onHover(colour);
+    this.onItemHover = (colour) => () => {
+      this.props.onItemHover(colour);
     };
 
-    this.onClick = (colour) => () => {
-      this.props.onClick(colour);
+    this.onItemClick = (colour) => (event) => {
+      event.shiftKey
+        ? this.props.onItemShiftClick(colour)
+        : this.props.onItemClick(colour);
     };
   }
 
   render () {
     return (
       <ul className={styles['palette']}>
-        {this.props.palette.map((colour, i) => (
-          colour
-            ? <Item key={i} colour={colour} onHover={this.onHover} onClick={this.onClick} />
-            : false
-        ))}
+        {this.props.palette.map((colour, i) => {
+          if (colour) {
+            return (
+              <Item
+                key={i}
+                colour={colour}
+                onHover={this.onItemHover}
+                onClick={this.onItemClick}
+              />
+            );
+          }
+
+          return false;
+        })}
       </ul>
     );
   }
 }
 
 Palette.propTypes = {
-  palette: PropTypes.array.isRequired,
-  onHover: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired
+  palette:          PropTypes.array.isRequired,
+  onItemHover:      PropTypes.func.isRequired,
+  onItemClick:      PropTypes.func.isRequired,
+  onItemShiftClick: PropTypes.func.isRequired
 };
 
 export default Palette;

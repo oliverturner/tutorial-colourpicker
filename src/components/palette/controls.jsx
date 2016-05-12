@@ -1,24 +1,18 @@
 import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
+import {connect}          from 'react-redux';
 
-import constants from 'constants';
-import styles from './styles.pcss';
+import constants  from 'constants';
+import ControlBar from 'components/controlbar';
 
 const PaletteControls = ({palette, fillPalette, sortPalette, shufflePalette, clearPalette}) => (
-  <div className={styles['controls']}>
-    <button className={styles['controlbtn']} onClick={fillPalette}>
-      Fill
-    </button>
-    <button className={styles['controlbtn']} onClick={sortPalette} disabled={palette.length < 2}>
-      Sort
-    </button>
-    <button className={styles['controlbtn']} onClick={shufflePalette} disabled={palette.length < 2}>
-      Mix
-    </button>
-    <button className={styles['controlbtn']} onClick={clearPalette} disabled={palette.length === 0}>
-      Clear
-    </button>
-  </div>
+  <ControlBar
+    controls={[
+      {label: 'Fill',  handler: fillPalette},
+      {label: 'Sort',  handler: sortPalette,    disabled: palette.length < 2},
+      {label: 'Mix',   handler: shufflePalette, disabled: palette.length < 2},
+      {label: 'Clear', handler: clearPalette,   disabled: palette.length === 0}
+    ]}
+  />
 );
 
 PaletteControls.propTypes = {
@@ -30,9 +24,7 @@ PaletteControls.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeColour: state.colours.get('active'),
-  tempColour:   state.colours.get('temp'),
-  palette:      state.palette.toArray()
+  palette: state.palette.toArray()
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,4 +1,4 @@
-import {List} from 'immutable';
+import {List, Range} from 'immutable';
 
 import {getRandomColour, getBrightness} from 'utils/colour';
 import constants from 'constants';
@@ -17,14 +17,17 @@ const addPaletteColour = (state, colour) => {
     : newState;
 };
 
+const deletePaletteColour = (state, colour) =>
+  state.delete(state.indexOf(colour));
+
 // Either fill the remaining slots up to maxLength
 // Or replace the entire list if full
 const fillPalette = (state) => {
   const rem = maxLength - state.size;
 
   return rem === 0
-    ? List(Array(maxLength).fill().map(getRandomColour))
-    : state.concat(Array(rem).fill().map(getRandomColour));
+    ? Range(0, maxLength).map(getRandomColour)
+    : state.concat(Range(0, rem).map(getRandomColour));
 };
 
 // Initialise
@@ -35,6 +38,9 @@ const palette = (state = initialState, action) => {
   switch (action.type) {
     case constants.PALETTE_ADD_COLOUR:
       return addPaletteColour(state, action.payload.colour);
+
+    case constants.PALETTE_DELETE_COLOUR:
+      return deletePaletteColour(state, action.payload.colour);
 
     case constants.PALETTE_FILL:
       return fillPalette(state);

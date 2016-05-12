@@ -1,20 +1,24 @@
 .preview {
-  composes: subcomponent from 'css/base.pcss';
-  composes: fader from 'css/base.pcss';
+  composes:  subcomponent from 'css/base.pcss';
+  composes:  fader from 'css/base.pcss';
+
+  position:  relative;
+  font-size: 0.8rem;
+  color:     #444;
+}
+
+.preview__name {
+  position:   absolute;
+  top:        0;
+  right:      0;
+  padding:    3px 6px;
+  background: rgba(255, 255, 255, 0.5);
+  color:      #333;
 }
 
 .preview__footer {
   margin-top: auto;
-  border:     none;
-  font-size:  1rem;
+  padding:    5px 0;
   text-align: center;
   background: rgba(255, 255, 255, 0.5);
-}
-
-.controls {
-  composes: controls from 'css/base.pcss';
-}
-
-.controlbtn {
-  composes: subcontrolbtn from 'css/base.pcss';
 }

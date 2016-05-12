@@ -1,15 +1,15 @@
 import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
+import {connect}          from 'react-redux';
 
-import constants from 'constants';
-import styles from './styles.pcss';
+import constants  from 'constants';
+import ControlBar from 'components/controlbar';
 
 const PreviewControls = ({setActiveColour}) => (
-  <div className={styles['controls']}>
-    <button className={styles['controlbtn']} onClick={() => setActiveColour()}>
-      Randomise
-    </button>
-  </div>
+  <ControlBar
+    controls={[
+      {label: 'Randomise', handler: setActiveColour}
+    ]}
+  />
 );
 
 PreviewControls.propTypes = {
@@ -17,7 +17,7 @@ PreviewControls.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  setActiveColour: (colour) => dispatch({type: constants.SET_ACTIVE_COLOUR, payload: {colour}})
+  setActiveColour: () => dispatch({type: constants.SET_ACTIVE_COLOUR, payload: {}})
 });
 
 export default connect(null, mapDispatchToProps)(PreviewControls);
