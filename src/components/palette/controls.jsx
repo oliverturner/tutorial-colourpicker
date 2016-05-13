@@ -4,19 +4,19 @@ import {connect}          from 'react-redux';
 import constants  from 'constants';
 import ControlBar from 'components/controlbar';
 
-const PaletteControls = ({palette, fillPalette, sortPalette, shufflePalette, clearPalette}) => (
+const PaletteControls = ({n, fillPalette, sortPalette, shufflePalette, clearPalette}) => (
   <ControlBar
     controls={[
       {label: 'Fill',  handler: fillPalette},
-      {label: 'Sort',  handler: sortPalette,    disabled: palette.length < 2},
-      {label: 'Mix',   handler: shufflePalette, disabled: palette.length < 2},
-      {label: 'Clear', handler: clearPalette,   disabled: palette.length === 0}
+      {label: 'Sort',  handler: sortPalette,    disabled: n < 2},
+      {label: 'Mix',   handler: shufflePalette, disabled: n < 2},
+      {label: 'Clear', handler: clearPalette,   disabled: n === 0}
     ]}
   />
 );
 
 PaletteControls.propTypes = {
-  palette:        PropTypes.array.isRequired,
+  n:              PropTypes.number.isRequired,
   fillPalette:    PropTypes.func.isRequired,
   sortPalette:    PropTypes.func.isRequired,
   shufflePalette: PropTypes.func.isRequired,
@@ -24,7 +24,7 @@ PaletteControls.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  palette: state.palette.toArray()
+  n: state.palette.size
 });
 
 const mapDispatchToProps = (dispatch) => ({

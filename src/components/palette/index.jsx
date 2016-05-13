@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import shallowCompare                from 'react-addons-shallow-compare';
 
 import styles from './styles.pcss';
 import Item   from './item';
@@ -16,6 +17,10 @@ class Palette extends Component {
         ? this.props.onItemShiftClick(colour)
         : this.props.onItemClick(colour);
     };
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    return shallowCompare(this, nextProps, nextState);
   }
 
   render () {
@@ -41,7 +46,7 @@ class Palette extends Component {
 }
 
 Palette.propTypes = {
-  palette:          PropTypes.array.isRequired,
+  palette:          PropTypes.object.isRequired,
   onItemHover:      PropTypes.func.isRequired,
   onItemClick:      PropTypes.func.isRequired,
   onItemShiftClick: PropTypes.func.isRequired

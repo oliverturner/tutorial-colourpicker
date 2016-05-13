@@ -17,8 +17,8 @@ const Application = ({
 }) => (
   <div className={styles['container']} style={{backgroundColor: activeColour}}>
     <div className={styles['component']}>
-      <Header>Colour Picker</Header>
-      <ColourField colour={activeColour} onChange={setActiveColour} onSubmit={addPaletteColour} />
+      <Header>Colour Picker Tutorial</Header>
+      <ColourField colour={activeColour.getOriginalInput()} onChange={setActiveColour} onSubmit={addPaletteColour} />
       <div className={styles['row']}>
         <div className={styles['row__item']}>
           <Preview activeColour={activeColour} tempColour={tempColour} />
@@ -39,9 +39,9 @@ const Application = ({
 );
 
 Application.propTypes = {
-  activeColour:        PropTypes.string.isRequired,
-  tempColour:          PropTypes.string,
-  palette:             PropTypes.array.isRequired,
+  activeColour:        PropTypes.object.isRequired,
+  tempColour:          PropTypes.object,
+  palette:             PropTypes.object.isRequired,
   setActiveColour:     PropTypes.func.isRequired,
   setTempColour:       PropTypes.func.isRequired,
   addPaletteColour:    PropTypes.func.isRequired,
@@ -51,7 +51,7 @@ Application.propTypes = {
 const mapStateToProps = (state) => ({
   activeColour: state.colours.get('active'),
   tempColour:   state.colours.get('temp'),
-  palette:      state.palette.toArray()
+  palette:      state.palette
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component, PropTypes} from 'react';
+import shallowCompare                from 'react-addons-shallow-compare';
 
 import styles from './styles.pcss';
 
@@ -15,6 +16,10 @@ class ColourField extends Component {
 
       this.props.onSubmit(this.props.colour);
     };
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    return shallowCompare(this, nextProps, nextState);
   }
 
   render () {

@@ -1,16 +1,21 @@
 import {List, Range} from 'immutable';
+import tinycolor     from 'tinycolor2';
 
 import {getRandomColour, getBrightness} from 'utils/colour';
-import constants from 'constants';
+import constants                        from 'constants';
 
 const maxLength = 16;
 
 // Ensure that every colour is unique
 // Constrain the size of the palette
 const addPaletteColour = (state, colour) => {
-  if (!colour || state.includes(colour)) return state;
+  // Bail on empty
+  if (!colour) return state;
 
-  const newState = state.unshift(colour);
+  // Bail on existing
+  if (state.find((c) => c.toHex() === tinycolor(colour).toHex())) return state;
+
+  const newState = state.unshift(tinycolor(colour));
 
   return newState.size > maxLength
     ? newState.setSize(maxLength)

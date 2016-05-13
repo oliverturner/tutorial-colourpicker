@@ -7,14 +7,8 @@ export const getRandomColour = () => {
   const rand   = Math.floor(Math.random() * dec).toString(16);
   const colour = tinycolor(rand);
 
-  return colour.isValid() ? colour.toHexString() : getRandomColour();
+  return colour.isValid() ? colour : getRandomColour();
 };
 
-export const getBrightness = (colour) => tinycolor(colour).getBrightness();
-
-export const getValidColour = (colour) => (
-  tinycolor(colour).isValid()
-    ? colour
-    : ''
-);
+export const getBrightness = (colour) => colour.getBrightness();
 

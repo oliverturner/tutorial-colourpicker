@@ -6,12 +6,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {AppContainer} from 'react-hot-loader';
+import {whyDidYouUpdate} from 'why-did-you-update'
 
 import configureStore from 'stores';
 import App from 'pages/home';
 
 const store  = configureStore();
 const rootEl = document.getElementById('app');
+
+if (process.env.NODE_ENV !== 'production') {
+  whyDidYouUpdate(React);
+}
 
 ReactDOM.render(
   <AppContainer>

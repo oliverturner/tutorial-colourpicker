@@ -59,7 +59,7 @@ function makeConfig ({
       loaders: moduleLoaders || [
         {
           test:    /\.jsx?$/,
-          loaders: ['babel'],
+          loaders: ['babel?cacheDirectory'],
           include: path.join(process.cwd(), 'src')
         },
         {
@@ -108,9 +108,11 @@ function makeConfig ({
     ],
 
     devServer: {
-      noInfo:      true,
-      port:        4000,
-      contentBase: './public'
+      noInfo:       true,
+      contentBase:  './public',
+      host:         '0.0.0.0',
+      port:         4000,
+      watchOptions: {poll: 1000}
     }
   };
 }

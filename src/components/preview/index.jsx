@@ -1,10 +1,9 @@
 import React, {PropTypes} from 'react';
-import tinycolor from 'tinycolor2';
 
 import styles from './styles.pcss';
 
 const Preview = ({activeColour, tempColour}) => {
-  const colour = tinycolor(tempColour || activeColour);
+  const colour = tempColour || activeColour;
 
   if (colour.isValid()) {
     return (
@@ -20,8 +19,8 @@ const Preview = ({activeColour, tempColour}) => {
 };
 
 Preview.propTypes = {
-  activeColour: PropTypes.string.isRequired,
-  tempColour:   PropTypes.string
+  activeColour: PropTypes.object.isRequired,
+  tempColour:   PropTypes.object
 };
 
 export default Preview;
